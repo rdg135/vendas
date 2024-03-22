@@ -9,6 +9,7 @@ import com.rdg135.vendas.rest.dto.InformacoesPedidoDTO;
 import com.rdg135.vendas.rest.dto.PedidoDTO;
 import com.rdg135.vendas.service.PedidoService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -38,6 +39,7 @@ public class PedidoController {
     }
 
     @GetMapping("{id}")
+    @ResponseStatus(OK)
     public InformacoesPedidoDTO getById(@PathVariable Integer id ) {
         return service
                 .obterPedidoCompleto(id)

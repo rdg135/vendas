@@ -6,6 +6,8 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,7 +25,7 @@ public class ClienteController {
 
     @GetMapping("{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Cliente getClienteById (@PathVariable Integer id) {
+    public Cliente getClienteById (@PathVariable Integer id, Authentication authentication) {
         return clientes
                 .findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
@@ -47,6 +49,7 @@ public class ClienteController {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PreAuthorize("hasRole('USER')")
     public void update( @PathVariable Integer id,
                         @RequestBody @Valid Cliente cliente) {
          clientes

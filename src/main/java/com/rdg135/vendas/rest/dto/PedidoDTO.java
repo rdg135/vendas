@@ -2,6 +2,7 @@ package com.rdg135.vendas.rest.dto;
 
 import com.rdg135.vendas.domain.entity.ItemPedido;
 import com.rdg135.vendas.validation.NotEmptyList;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,6 @@ public class PedidoDTO {
 
 //    private BigDecimal total;
 
-    @NotEmptyList(message = "Adicione itens ao pedido.", payLoad={})
+    @NotEmpty(message = "Adicione itens ao pedido.")
     private List<ItemPedidoDTO> items;
 }
